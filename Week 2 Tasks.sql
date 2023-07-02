@@ -1,19 +1,50 @@
 -- Task #1
 USE LittleLemonDB;
 DROP VIEW IF EXISTS OrdersView;
-CREATE VIEW OrdersView AS SELECT OrderID, Quantity,TotalCost FROM Orders;
-SELECT * FROM OrdersView;
+CREATE VIEW OrdersView AS
+    SELECT 
+        OrderID, Quantity, TotalCost
+    FROM
+        Orders;
+SELECT 
+    *
+FROM
+    OrdersView;
 
 -- Task #2
-SELECT c.CustomerID, c.Name, o.OrderID, o.TotalCost, m.Name, mi.Course, mi.Starter 
-FROM Customers AS c INNER JOIN Orders AS o ON c.CustomerID=o.CustomerID 
-INNER JOIN Menus AS m ON o.MenuID=m.MenuID 
-INNER JOIN MenuContent AS mc ON m.MenuID=mc.MenuID 
-INNER JOIN MenuItems AS mi ON mc.MenuItemID=mi.MenuItemID 
-WHERE o.TotalCost>500;
+SELECT 
+    c.CustomerID,
+    c.Name,
+    o.OrderID,
+    o.TotalCost,
+    m.Name,
+    mi.Course,
+    mi.Starter
+FROM
+    Customers AS c
+        INNER JOIN
+    Orders AS o ON c.CustomerID = o.CustomerID
+        INNER JOIN
+    Menus AS m ON o.MenuID = m.MenuID
+        INNER JOIN
+    MenuContent AS mc ON m.MenuID = mc.MenuID
+        INNER JOIN
+    MenuItems AS mi ON mc.MenuItemID = mi.MenuItemID
+WHERE
+    o.TotalCost > 500;
 
 -- Task #3
-SELECT Name FROM Menus WHERE MenuID=ANY (SELECT MenuID FROM Orders WHERE Quantity>2);
+SELECT 
+    Name
+FROM
+    Menus
+WHERE
+    MenuID = ANY (SELECT 
+            MenuID
+        FROM
+            Orders
+        WHERE
+            Quantity > 2);
 
 -- Task #1 :Stored Procedure
 DROP PROCEDURE IF EXISTS GetMaxQuantity;
@@ -44,7 +75,10 @@ VALUES 	(1, "2022-10-10", 5, 1),
 		(2, "2022-11-12", 3, 3),
 		(3, "2022-10-11", 2, 2),
 		(4 ,"2022-10-13", 2, 1);
-SELECT * FROM bookings;
+SELECT 
+    *
+FROM
+    bookings;
 
 -- Task #2 :Table Booking System
 DROP PROCEDURE IF EXISTS CheckBooking;
